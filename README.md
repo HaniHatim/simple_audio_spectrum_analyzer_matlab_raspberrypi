@@ -75,12 +75,27 @@ A simple webpage using **Chart.js** displays 64 real-time frequency bars at ~30 
 
 ## 🚀 Installation & Setup
 
-### 1. Raspberry Pi 5 Setup (Important)
+### 1. Raspberry Pi 5 Setup (Crucial Step)
 
-Bookworm OS enforces PEP 668, so you cannot install Python packages globally unless you use a virtual environment.
+The Raspberry Pi 5 runs the newer "Bookworm" OS, which has strict rules about installing Python libraries (PEP 668). You cannot simply run `pip install` globally. You have two options to set this up:
 
-#### Option A: Create a virtual environment (Recommended)
+#### Option A: The Virtual Environment (Recommended)
+This creates a simplified "sandbox" for the project so it doesn't interfere with the system.
+
+1.  Create a virtual environment folder named `venv`:
+    ```bash
+    python3 -m venv venv
+    ```
+2.  Activate the environment:
+    ```bash
+    source venv/bin/activate
+    ```
+3.  Install the required libraries inside this environment:
+    ```bash
+    pip install flask flask-socketio eventlet
+    ```
+
+#### Option B: The "Force" Method
+If you don't want to use a virtual environment and just want to install the libraries globally on the Pi, you must use the break-system flag:
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install flask flask-socketio eventlet
+pip install flask flask-socketio eventlet --break-system-package
